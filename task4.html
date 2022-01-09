@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        h1{
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h2>Book Bill System  </h2>
+<div class="container-fluid">
+    <div class="container">
+        <div class="part1">
+            <fieldset>
+                <legend>Personal Information</legend>
+                Full Name: <input type="text" id="name"> <br/>
+
+                Your Email: <input type="text" id="email">
+            </fieldset>
+        </div>
+
+
+        <div class="part2">
+            <fieldset>
+                <legend>Your Orders</legend>
+                b1) Why Not Me_price (Rs.1-Per Day): <input type="text" id="b1"> <br/>
+                b2) Wings of fire_price (Rs. 2-Per Day): <input type="text" id="b2"><br/>
+                b3) Belive in Yourself_price (Rs.1-Per Day): <input type="text" id="b3"><br/>
+                b4) Life is What You Make it_price (Rs.5-Per Day): <input type="text" id="maggi"><br/>
+            </fieldset>
+        </div>
+        
+    </div>
+
+    <div class="container" id="bill1" style="background-color: white; border-radius: 5px;">
+        <fieldset>
+            <legend>Your Bill</legend>
+            <h3>Your Name:<span id="name2"></span></h3>
+            <h3>Email: <span id="email2"></span></h3>
+            <table border="1" >
+                <thead>
+                    <tr><th>Menu</th><th>Price</th><th>Quantity</th><th>Amout</th></tr>
+                </thead>
+                <tbody id="bill">
+                    <!-- <tr><td>b1</td><td>Rs. 10</td><td>1</td><td>10x1 = 10</td></tr> -->
+                </tbody>
+
+                
+
+            </table>
+            <h3>Total Amout: Rs. <span id="amount">0</span></h3>
+            </fieldset>
+            
+    </div>
+    <button id="button">Generate</button>
+</div>
+
+
+<script>
+var b1 = 1, b2 = 2, b3 = 1, Maggi = 5;
+var b1_q=0, b2_q=0, b3_q=0, b4_q=0;
+var name = "", email="";
+var b1Bill="",b2Bill="",b3Bill="",maggiBill="";
+var total_amount=0;
+document.getElementById("name").addEventListener("keyup",function(){
+    // name = document.getElementById("name").value;
+    
+    document.getElementById("name2").innerHTML=this.value;
+});
+
+document.getElementById("email").addEventListener("keyup",function(){
+    // name = document.getElementById("name").value;
+    
+    document.getElementById("email2").innerHTML=this.value;
+});
+
+
+
+document.getElementById("b1").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    b1Bill="";
+    b1_q=0;
+    showBill();
+}else{
+    b1_q=this.value;
+    b1Bill="<tr><td>b1</td><td>Rs. "+b1+"</td><td>"+b1_q+"</td><td>"+b1+"x"+b1_q+" = "+b1*b1_q+"</td></tr>";
+    showBill();
+
+}
+});
+
+document.getElementById("b2").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    b2Bill="";
+    b2_q=0;
+    showBill();
+
+}else{
+    b2_q=this.value;
+    b2Bill="<tr><td>b2</td><td>Rs. "+b2+"</td><td>"+b2_q+"</td><td>"+b2+"x"+b2_q+" = "+b2*b2_q+"</td></tr>";
+    showBill();
+}
+});
+
+document.getElementById("b3").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    b3Bill="";
+    b3_q=0;
+    showBill();
+
+}else{
+    b3_q=this.value;
+    b3Bill="<tr><td>b3</td><td>Rs. "+b3+"</td><td>"+b3_q+"</td><td>"+b3+"x"+b3_q+" = "+b3*b3_q+"</td></tr>";
+    showBill();
+}
+});
+
+document.getElementById("maggi").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    maggiBill="";
+    b4_q=0;
+    showBill();
+
+}else{
+    b4_q=this.value;
+    maggiBill="<tr><td>Maggi</td><td>Rs. "+Maggi+"</td><td>"+b4_q+"</td><td>"+b3+"x"+b4_q+" = "+Maggi*b4_q+"</td></tr>";
+    showBill();
+}
+});
+
+
+function showBill(){
+    document.getElementById("bill").innerHTML=b1Bill+b2Bill+b3Bill+maggiBill; //table statement
+    document.getElementById("amount").innerHTML = b1*b1_q+b2*b2_q+b3*b3_q+Maggi*b4_q; // total amount
+}
+</script>
+
+<!-- jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- image to dom cdn  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/g/filesaver.js"></script>
+<script>
+    $(document).ready(function(){
+    $("#button").click(function(){
+        domtoimage.toBlob(document.getElementById('bill1'))
+        .then(function (blob) {
+            window.saveAs(blob, `${name}_Bill.png`);
+			window.open("task4.html", "_self");
+        });
+    })
+})
+
+</script>
+</body>
+</html>
